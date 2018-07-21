@@ -1,6 +1,7 @@
 import Search from './models/Search';
 import * as searchView from './views/searchView';
 import {elements, renderLoader, clearLoader} from './views/base';
+import Recipe from './models/Recipe';
 
 /** Global state of the app
  * - Search object
@@ -45,9 +46,16 @@ elements.searchForm.addEventListener('submit', e => {
 elements.searchResPages.addEventListener('click', e => {
     const btn = e.target.closest('.btn-inline');
     if (btn) {
-        console.log(btn);
         const goToPage = parseInt(btn.dataset.goto, 10);
         searchView.clearResults();
         searchView.renderResults(state.search.result, goToPage);
     }
 });
+
+/** 
+ * RECIPE CONTROLLER
+*/
+
+const r = new Recipe(46956);
+r.getRecipe();
+console.log(r);
