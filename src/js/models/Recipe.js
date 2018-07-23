@@ -58,9 +58,9 @@ export default class Recipe {
                 
                 let count;
                 if (arrCount.length === 1) {
-                    count = eval(arrIng[0].replace('-', '+'));
+                    count = eval(arrIng[0].replace('-', '+')).toFixed(1);
                 } else {
-                    count = eval(arrIng.slice(0, unitIndex).join('+'));
+                    count = eval(arrIng.slice(0, unitIndex).join('+')).toFixed(1);
                 }
 
                 objIng = {
@@ -88,6 +88,19 @@ export default class Recipe {
             return objIng;
         });
         this.ingredients = newIngredients;
+    }
+
+    updateServings (type) { 
+        // Servings
+        const newServings = type === 'dec' ? this.servings -1 : this.servings + 1;
+
+        // Ingredients
+        this.ingredients.forEach(ing => {
+            ing.count *=  (newServings / this.servings);
+        });
+
+        this.servings = newServings;
+
     }
 
 }
